@@ -31,7 +31,6 @@ public class Message {
     public Message(byte[] bytes) throws IOException {
         MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(bytes);
 
-        int arrayHeader = unpacker.unpackArrayHeader();
         this.type = unpacker.unpackString();
 
         // unpack data

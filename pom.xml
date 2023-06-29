@@ -6,7 +6,7 @@
 
     <groupId>com.github.myzhan</groupId>
     <artifactId>locust4j</artifactId>
-    <version>2.2.1</version>
+    <version>2.2.2-SNAPSHOT</version>
     <name>locust4j</name>
     <description>Locust4j is a load generator for locust, written in Java.</description>
     <url>https://github.com/myzhan/locust4j</url>
@@ -41,8 +41,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sourceJavaVersion>1.7</sourceJavaVersion>
-        <targetJavaVersion>1.7</targetJavaVersion>
+        <sourceJavaVersion>1.8</sourceJavaVersion>
+        <targetJavaVersion>1.8</targetJavaVersion>
     </properties>
 
     <profiles>
@@ -54,7 +54,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>2.2.1</version>
+                        <version>3.3.0</version>
                         <executions>
                             <execution>
                                 <phase>package</phase>
@@ -82,7 +82,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <phase>verify</phase>
@@ -111,7 +111,7 @@
         <dependency>
             <groupId>org.msgpack</groupId>
             <artifactId>msgpack-core</artifactId>
-            <version>0.8.13</version>
+            <version>0.9.3</version>
         </dependency>
         <dependency>
             <groupId>org.zeromq</groupId>
@@ -132,13 +132,13 @@
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-core</artifactId>
-            <version>1.21</version>
+            <version>1.36</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
-            <version>1.21</version>
+            <version>1.36</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -160,10 +160,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>

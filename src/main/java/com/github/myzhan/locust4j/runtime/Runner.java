@@ -188,6 +188,7 @@ public class Runner {
 
     protected void startSpawning(int spawnCount) {
         Stats.getInstance().wakeMeUp();
+
         if (this.taskExecutor == null) {
             this.setTaskExecutor(new ThreadPoolExecutor(spawnCount, spawnCount, 0L, TimeUnit.MILLISECONDS,
                     new LinkedBlockingQueue<Runnable>(),
@@ -199,12 +200,16 @@ public class Runner {
                             return thread;
                         }
                     }));
-        } else if (spawnCount > this.taskExecutor.getMaximumPoolSize()) {
-            this.taskExecutor.setMaximumPoolSize(spawnCount);
-            this.taskExecutor.setCorePoolSize(spawnCount);
         } else {
-            this.taskExecutor.setCorePoolSize(spawnCount);
-            this.taskExecutor.setMaximumPoolSize(spawnCount);
+            if (spawnCount == 0) {
+                shutdownThreadPool();
+            } else if (spawnCount > this.taskExecutor.getMaximumPoolSize()) {
+                this.taskExecutor.setMaximumPoolSize(spawnCount);
+                this.taskExecutor.setCorePoolSize(spawnCount);
+            } else {
+                this.taskExecutor.setCorePoolSize(spawnCount);
+                this.taskExecutor.setMaximumPoolSize(spawnCount);
+            }
         }
 
         this.spawnWorkers(spawnCount);
@@ -398,7 +403,8 @@ public class Runner {
                     Message message = runner.rpcClient.recv();
                     runner.onMessage(message);
                 } catch (Exception ex) {
-                    logger.error("Error while receiving a message", ex);
+                    logger.error("maximum pool size: " + runner.taskExecutor.getMaximumPoolSize() + "\t core pool size: " + runner.taskExecutor.getCorePoolSize());
+                    logger.error("Error while receiving a message \n " + "maximum pool size: " + runner.taskExecutor.getMaximumPoolSize() + "\t core pool size: " + runner.taskExecutor.getCorePoolSize(), ex);
                 }
             }
         }
